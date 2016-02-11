@@ -136,20 +136,42 @@ console.assert(fizzbuzz(10) === "..fizz.buzzfizz..fizzbuzz")
  * i.e. findLongestWord("a book full of dogs") should return "book"
  */
 
+var contains = function(sequence,element) {
+     if (sequence.indexOf(element) === -1) {
+         return false
+        }
+        else {
+            return true
+        }
+}
+
+var alphabet = 'qwertyuiopasdfghjklzxcvbnm1234567890 '
+
+var stripPunct = function (inputString) {
+  var newString = ''
+  for (var i=0; i < inputString.length; i++) {
+    var char = inputString[i]
+    if (contains(alphabet,char.toLowerCase())) {
+        newString += char
+    }
+  }
+  return newString
+}
+
 function findLongestWord(sentence){
     var wordsArray = sentence.split(' ')
     var longestWord = ''
     for (var i = 0; i < wordsArray.length; i++) {
-     	var word = wordsArray[i]
-        if (longestWord.length < word.length) {
-            var longestWord = word
+        var word = wordsArray[i]
+        if (longestWord.length < stripPunct(word).length) {
+            var longestWord = stripPunct(word)
         }
     }
     return longestWord
 }
 
 console.assert(findLongestWord("a book full of dogs") === "book")
-// console.assert(findLongestWord("don't mess with Texas") === "Texas")
+console.assert(findLongestWord("don't mess with Texas") === "Texas")
 
 
 
